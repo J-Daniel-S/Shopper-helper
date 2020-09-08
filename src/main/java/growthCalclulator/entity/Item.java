@@ -15,8 +15,8 @@ import org.springframework.lang.NonNull;
 public class Item {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_seq")
-	@SequenceGenerator(name = "item_seq", sequenceName = "item_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "item_id", allocationSize = 1)
 	private long itemId;
 	@NonNull
 	@Column(name = "name", nullable = false)

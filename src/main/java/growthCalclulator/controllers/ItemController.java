@@ -18,7 +18,7 @@ import growthCalclulator.entity.Item;
 import growthCalclulator.services.ItemService;
 
 @RestController
-@CrossOrigin(origins = "localhost:3000", allowedHeaders = "*", methods = { RequestMethod.POST, RequestMethod.GET,
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", methods = { RequestMethod.POST, RequestMethod.GET,
 		RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS })
 @RequestMapping("/shopper-helper")
 public class ItemController {
@@ -37,23 +37,13 @@ public class ItemController {
 		return iRepo.findAll();
 	}
 
-	@GetMapping("/list")
-	public List<Item> getListItems() {
-		return iRepo.findAllOnList();
-	}
-
-	@GetMapping("/cart")
-	public List<Item> getCartItems() {
-		return iRepo.findAllInCart();
-	}
-
-	@DeleteMapping("/list/{id}")
+	@DeleteMapping("/{id}")
 	public List<Item> deleteItem(@PathVariable long id) {
 		iRepo.deleteItem(id);
 		return iRepo.findAll();
 	}
 
-	@PutMapping("/list/{id}")
+	@PutMapping("/{id}")
 	public List<Item> moveItemToCart(@PathVariable long id) {
 		Item item = iRepo.findById(id);
 		item.setInCart(true);
@@ -67,19 +57,19 @@ public class ItemController {
 		return iRepo.findAll();
 	}
 
-	@DeleteMapping("/cart/purchase")
+	@DeleteMapping("/cart")
 	public List<Item> purchaseCart() {
 		iRepo.purchaseCart();
 		return iRepo.findAll();
 	}
 
-	@DeleteMapping("/clear")
+	@DeleteMapping
 	public List<Item> purchaseAll() {
 		iRepo.purchaseAll();
 		return iRepo.findAll();
 	}
 
-	@DeleteMapping("/list/clear")
+	@DeleteMapping("/list")
 	public List<Item> clearList() {
 		iRepo.clearList();
 		return iRepo.findAll();
